@@ -11,6 +11,9 @@
   --color-navy-foreground: var(--navy-foreground);
   --color-cta: var(--cta);
   --color-cta-foreground: var(--cta-foreground);
+  --color-brand-blue: var(--brand-blue);
+  --color-ink-body: var(--ink-body);
+  --color-ink-muted: var(--ink-muted);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -82,6 +85,9 @@
   --navy-foreground: #ffffff;
   --cta: #ff8f00;
   --cta-foreground: #071d3a;
+  --brand-blue: #264df2;
+  --ink-body: #474f66;
+  --ink-muted: #6b7385;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);

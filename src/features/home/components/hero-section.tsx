@@ -1,0 +1,101 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import { buttonVariants } from "@/components/ui/button";
+import { TRIAL_CTA } from "@/config/site";
+import { cn } from "@/lib/utils";
+
+const BENEFITS = [
+  { label: "Tư vấn lộ trình miễn phí", icon: "/images/home/icon-routing.svg" },
+  { label: "Học thử 1:1", icon: "/images/home/icon-folder.svg" },
+  { label: "Đánh giá đầu vào", icon: "/images/home/icon-teacher.svg" },
+];
+
+export function HeroSection() {
+  return (
+    <section className="overflow-hidden bg-linear-to-r from-[#fafbff] to-[#ebedff]">
+      <div className="container-page grid items-center gap-12 py-12 lg:grid-cols-2 lg:gap-8 lg:py-20 xl:grid-cols-[1fr_minmax(0,680px)]">
+        <div className="flex flex-col items-start gap-10 lg:gap-16">
+          <div className="flex flex-col items-start gap-6 lg:gap-8">
+            <p className="inline-flex items-center gap-2.5 rounded-full bg-[#ebedff] px-4.5 py-2 text-sm/[1.4] font-semibold text-[#00095f] sm:text-base/[1.4]">
+              <Image src="/images/home/icon-code.svg" alt="" width={22} height={22} />
+              LẬP TRÌNH & CÔNG NGHỆ CHO HỌC SINH 7–18 TUỔI
+            </p>
+            <h1 className="text-3xl/[1.4] font-bold text-[#00095f] sm:text-[40px]/[1.4] lg:text-[34px]/[1.4] xl:text-[40px]/[1.4]">
+              Giúp con tư duy, sáng tạo <br className="hidden sm:inline" />
+              và làm chủ công nghệ <br className="hidden sm:inline" />
+              trong thời đại AI.
+            </h1>
+            <ul className="flex flex-wrap gap-x-6.5 gap-y-3 text-sm/[1.4] text-ink-body">
+              {BENEFITS.map((benefit) => (
+                <li key={benefit.label} className="flex items-center gap-3">
+                  <Image src={benefit.icon} alt="" width={18} height={18} />
+                  {benefit.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex flex-wrap gap-4.5">
+            <Link
+              href={TRIAL_CTA.href}
+              className={cn(
+                buttonVariants({ size: "xl" }),
+                "h-16 w-57.5 rounded-full bg-brand-blue px-6 font-semibold text-white hover:bg-brand-blue/90",
+              )}
+            >
+              <Image src="/images/home/icon-calendar.svg" alt="" width={22} height={22} />
+              {TRIAL_CTA.label}
+            </Link>
+            <Link
+              href="/khoa-hoc"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "xl" }),
+                "h-16 w-62.5 rounded-full border-[1.5px] border-brand-blue bg-transparent px-6 font-semibold text-brand-blue hover:bg-brand-blue/5 hover:text-brand-blue",
+              )}
+            >
+              Khám phá khóa học
+              <Image src="/images/home/icon-arrow-circle-right.svg" alt="" width={22} height={22} />
+            </Link>
+          </div>
+        </div>
+
+        {/* Layers and offsets follow the Figma "Hero Visual" frame (680 × 660). */}
+        <div className="relative mx-auto aspect-[680/660] w-full max-w-170">
+          <div className="absolute inset-0 overflow-hidden rounded-[32px]">
+            <div className="absolute top-[-23.85%] left-[-26.8%] size-[129.12%]">
+              <Image
+                src="/images/home/hero-photo.jpg"
+                alt=""
+                fill
+                priority
+                sizes="(min-width: 1024px) 880px, 130vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+          <div
+            aria-hidden
+            className="absolute top-[43.2%] left-[8.8%] hidden w-[30%] min-w-max flex-col gap-2 rounded-[14px] bg-[#081229] p-4.5 font-medium shadow-[0px_8px_18px_0px_rgba(8,20,51,0.18)] sm:flex"
+          >
+            <span className="text-sm text-[#f2b2e5]">for i in range(5):</span>
+            <span className="text-[13px] whitespace-pre text-[#a6c7ff]">{"  if i % 2 == 0:"}</span>
+            <span className="text-[13px] whitespace-pre text-[#ffdb33]">{"    print(i)"}</span>
+          </div>
+          <div className="absolute top-[13.18%] left-[-13.68%] h-[86.82%] w-[111.62%] overflow-hidden">
+            <div className="relative h-[105.41%] w-full">
+              <Image
+                src="/images/home/hero-student.png"
+                alt="Học sinh vui vẻ học lập trình trên máy tính xách tay"
+                fill
+                priority
+                sizes="(min-width: 1024px) 760px, 112vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
