@@ -48,7 +48,7 @@ export function HeroSection() {
               {TRIAL_CTA.label}
             </Link>
             <Link
-              href="/khoa-hoc"
+              href="#"
               className={cn(
                 buttonVariants({ variant: "outline", size: "xl" }),
                 "h-16 w-62.5 rounded-full border-[1.5px] border-brand-blue bg-transparent px-6 font-semibold text-brand-blue hover:bg-brand-blue/5 hover:text-brand-blue",

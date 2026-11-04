@@ -33,7 +33,7 @@ const STAGE_FOUNDATION = {
     { src: "/images/home/roadmap-line-1a.svg", box: [344, 42, 205, 252] },
     { src: "/images/home/roadmap-line-1b.svg", box: [976, 32.66, 232, 278] },
     { src: "/images/home/roadmap-line-1c.svg", box: [728, 392, 237, 237] },
-    { src: "/images/home/roadmap-car-1.png", box: [65, 397, 166, 166] },
+    { src: "/images/home/roadmap-car-1-removebg-preview.png", box: [65, 397, 166, 166] },
     { src: "/images/home/roadmap-pipe.png", box: [657, 568, 125.43, 231], className: "-scale-x-100" },
   ] satisfies Decoration[],
   numbers: [
@@ -83,7 +83,7 @@ const STAGE_PATHWAYS = {
     { src: "/images/home/roadmap-line-2d.svg", box: [951.66, 353, 278, 232] },
     { src: "/images/home/roadmap-line-2e.svg", box: [263, 566.66, 255, 205] },
     { src: "/images/home/roadmap-round-exit.svg", box: [668, 824, 103, 165] },
-    { src: "/images/home/roadmap-car-2.png", box: [764, 216, 231.5, 231.5] },
+    { src: "/images/home/roadmap-car-2-removebg-preview.png", box: [764, 216, 231.5, 231.5] },
     { src: "/images/home/roadmap-pipe.png", box: [657, 825, 125.43, 231], className: "-scale-x-100" },
     { src: "/images/home/roadmap-pipe.png", box: [657, -24, 125.43, 231], className: "rotate-180" },
   ] satisfies Decoration[],
@@ -133,8 +133,8 @@ const STAGE_SPECIALIZATION = {
   decorations: [
     { src: "/images/home/roadmap-road-3.svg", box: [322.5, 0, 1051, 1036] },
     { src: "/images/home/roadmap-line-3.svg", box: [468, 371, 151, 240] },
-    { src: "/images/home/roadmap-car-3.png", box: [637, 111, 166, 166] },
-    { src: "/images/home/roadmap-flag.png", box: [713, 857, 167, 126] },
+    { src: "/images/home/roadmap-car-3-removebg-preview.png", box: [637, 111, 166, 166] },
+    { src: "/images/home/roadmap-flag-removebg-preview.png", box: [713, 857, 167, 126] },
     { src: "/images/home/roadmap-pipe.png", box: [657, -120, 125.43, 231], className: "rotate-180" },
     { src: "/images/home/roadmap-pipe.png", box: [671, 975, 125.43, 231], className: "-scale-x-100" },
   ] satisfies Decoration[],
@@ -157,7 +157,7 @@ const CANVAS_CLASS =
 
 export function RoadmapSection() {
   return (
-    <section className="overflow-hidden bg-white pb-12 lg:pb-0">
+    <section className="overflow-hidden bg-white pb-12 select-none lg:pb-0">
       <div className="container-page pt-12 pb-10 lg:pt-20 lg:pb-0">
         <SectionHeading
           title="Hành trình phát triển năng lực công nghệ 8–18 tuổi"
@@ -181,18 +181,20 @@ export function RoadmapSection() {
 
       <DesignCanvas height={STAGE_PATHWAYS.height} className={cn(CANVAS_CLASS, "mt-10 lg:mt-0")}>
         <Decorations items={STAGE_PATHWAYS.decorations} />
-        <p className="flex flex-col items-center text-center font-semibold text-black lg:contents">
+        {/* Figma: "04" at y 388 and the label box 246 × 84 at (597, 538), both centred on x 720. */}
+        <p className="flex flex-col items-center text-center text-black lg:contents">
           <span
-            className="text-6xl lg:absolute lg:top-(--y) lg:left-1/2 lg:-translate-x-1/2 lg:text-[length:calc(149.5*var(--dp))]/normal"
-            style={boxVars(0, 388)}
+            className="text-6xl font-semibold lg:absolute lg:top-(--y) lg:left-(--x) lg:w-[calc(246*var(--dp))] lg:text-[length:calc(149.5*var(--dp))]/[1.05]"
+            style={boxVars(597, 388)}
           >
             04
           </span>
           <span
-            className="text-2xl lg:absolute lg:top-(--y) lg:left-1/2 lg:-translate-x-1/2 lg:text-[length:calc(40*var(--dp))]/normal"
-            style={boxVars(0, 538)}
+            className="flex flex-col text-2xl/[1.05] font-bold lg:absolute lg:top-(--y) lg:left-(--x) lg:w-[calc(246*var(--dp))] lg:text-[length:calc(36*var(--dp))]/[1.167]"
+            style={boxVars(597, 538)}
           >
-            Technology Pathways
+            <span className="whitespace-nowrap">Technology</span>
+            <span className="whitespace-nowrap">Pathways</span>
           </span>
         </p>
         <RoadmapCards items={STAGE_PATHWAYS.cards} />
@@ -233,6 +235,7 @@ function Decorations({ items }: { items: Decoration[] }) {
         alt=""
         width={Math.round(width)}
         height={Math.round(height)}
+        draggable={false}
         className={cn("absolute hidden max-w-none lg:block", item.className)}
         style={box(left, top, width, height)}
       />

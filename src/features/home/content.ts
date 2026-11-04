@@ -94,7 +94,7 @@ export const FEATURED_COURSES: FeaturedCourse[] = [
     title: "Scratch & Creative Coding",
     tagline: "Bước đầu khám phá lập trình",
     image: "/images/home/course-scratch.png",
-    href: "/khoa-hoc/scratch",
+    href: "#",
     details: [
       { label: "Độ tuổi", value: "7–10 tuổi" },
       { label: "Đầu vào", value: "Không yêu cầu nền tảng" },
@@ -105,7 +105,7 @@ export const FEATURED_COURSES: FeaturedCourse[] = [
     title: "Computer Science Foundations",
     tagline: "Xây nền tảng tư duy khoa học máy tính",
     image: "/images/home/course-computer-science.png",
-    href: "/khoa-hoc/python",
+    href: "#",
     details: [
       { label: "Độ tuổi", value: "10+ tuổi" },
       { label: "Đầu vào", value: "Từ cơ bản" },
@@ -116,7 +116,7 @@ export const FEATURED_COURSES: FeaturedCourse[] = [
     title: "Web Development",
     tagline: "Biến ý tưởng thành sản phẩm số",
     image: "/images/home/course-web.png",
-    href: "/khoa-hoc/web-development",
+    href: "#",
     details: [
       { label: "Độ tuổi", value: "12+ tuổi" },
       { label: "Đầu vào", value: "Có nền tảng lập trình" },
@@ -127,7 +127,7 @@ export const FEATURED_COURSES: FeaturedCourse[] = [
     title: "Data & AI",
     tagline: "Khám phá dữ liệu và trí tuệ nhân tạo",
     image: "/images/home/course-data-ai.png",
-    href: "/khoa-hoc/data-ai",
+    href: "#",
     details: [
       { label: "Độ tuổi", value: "13+ tuổi" },
       { label: "Đầu vào", value: "Khuyến nghị có Python" },

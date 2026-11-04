@@ -25,7 +25,7 @@ export function CtaSection() {
               Đăng ký buổi học thử để con trải nghiệm lập trình và nhận tư vấn lộ trình phù hợp.
             </p>
             <Link
-              href={TRIAL_CTA.href}
+              href="#"
               className={cn(
                 buttonVariants({ variant: "cta" }),
                 "h-14 px-8 text-base font-bold text-white",

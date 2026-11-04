@@ -17,15 +17,15 @@ export const SITE_CONFIG = {
 } as const;
 
 export const MAIN_NAV: NavItem[] = [
-  { label: "Khoá học", href: "/khoa-hoc" },
-  { label: "Sản phẩm học viên", href: "/san-pham-hoc-vien" },
-  { label: "Tin tức - Sự kiện", href: "/tin-tuc" },
-  { label: "Về chúng tôi", href: "/ve-chung-toi" },
+  { label: "Khoá học", href: "#" },
+  { label: "Sản phẩm học viên", href: "#" },
+  { label: "Tin tức - Sự kiện", href: "#" },
+  { label: "Về chúng tôi", href: "#" },
 ];
 
 export const TRIAL_CTA: NavItem = {
   label: "Đăng ký học thử",
-  href: "/dang-ky-hoc-thu",
+  href: "#",
 };
 
 // Social links have no `href` yet; they render as plain text until the URLs are confirmed.
@@ -34,19 +34,19 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
     title: "Khám phá",
     links: [
       { label: "Trang chủ", href: "/" },
-      { label: "Về Center9Edu", href: "/ve-chung-toi" },
-      { label: "Lộ trình học", href: "/lo-trinh-hoc" },
-      { label: "Các khóa học", href: "/khoa-hoc" },
-      { label: "Sản phẩm học viên", href: "/san-pham-hoc-vien" },
+      { label: "Về Center9Edu", href: "#" },
+      { label: "Lộ trình học", href: "#" },
+      { label: "Các khóa học", href: "#" },
+      { label: "Sản phẩm học viên", href: "#" },
     ],
   },
   {
     title: "Khoá học",
     links: [
-      { label: "Scratch", href: "/khoa-hoc/scratch" },
-      { label: "Python Programming", href: "/khoa-hoc/python" },
-      { label: "Web Development", href: "/khoa-hoc/web-development" },
-      { label: "Data & AI", href: "/khoa-hoc/data-ai" },
+      { label: "Scratch", href: "#" },
+      { label: "Python Programming", href: "#" },
+      { label: "Web Development", href: "#" },
+      { label: "Data & AI", href: "#" },
     ],
   },
   {

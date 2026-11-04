@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export function ParentConcernsSection() {
   return (
     <section className="bg-[#fbfbfd]">
-      <div className="container-page flex flex-col items-center gap-8 py-12 lg:py-20">
+      <div className="container-page flex flex-col items-center gap-8 py-12 select-none lg:py-20">
         <SectionHeading
           title={
             <>

@@ -15,7 +15,7 @@ export function SiteHeader() {
         <nav aria-label="Menu chính" className="hidden xl:block">
           <ul className="flex gap-6 text-xl font-semibold tracking-[0.01em] text-white/60">
             {MAIN_NAV.map((item) => (
-              <li key={item.href}>
+              <li key={item.label}>
                 <Link href={item.href} className="transition-colors hover:text-white">
                   {item.label}
                 </Link>
