@@ -13,7 +13,7 @@ export function LearningJourneySection() {
         alt=""
         width={1889}
         height={988}
-        className="absolute top-[-28px] left-1/2 hidden max-w-none -translate-x-1/2 lg:block"
+        className="absolute top-[-28px] left-1/2 hidden max-w-none -translate-x-1/2 xl:block"
       />
       <div className="container-page relative pt-12 lg:pt-20">
         <SectionHeading
@@ -24,14 +24,14 @@ export function LearningJourneySection() {
       {/* Canvas starts 200px below the top of the Figma frame, where the cards area begins. */}
       <DesignCanvas
         height={788}
-        className="container-page flex flex-col items-center gap-14 pt-16 pb-12 lg:mx-auto lg:block lg:max-w-360 lg:px-0 lg:py-0"
+        className="items-center gap-14 pt-16 pb-12"
       >
         <Image
           src="/images/home/journey-path.svg"
           alt=""
           width={1490}
           height={260}
-          className="absolute hidden max-w-none lg:block"
+          className="absolute hidden max-w-none xl:block"
           style={box(-24, 226, 1490, 260.2)}
         />
         <ol className="contents">
@@ -49,7 +49,7 @@ function JourneyCard({ step }: { step: JourneyStep }) {
   return (
     <li
       className={cn(
-        "relative w-full max-w-[22.6875em] rounded-[2em] border-4 border-white px-[1.25em] pt-[6.75em] pb-[1.75em] text-[16px] drop-shadow-[0px_12px_14px_rgba(13,31,77,0.16)] lg:absolute lg:top-(--y) lg:left-(--x) lg:text-[length:calc(16*var(--dp))]",
+        "relative w-full max-w-[22.6875em] rounded-[2em] border-4 border-white px-[1.25em] pt-[6.75em] pb-[1.75em] text-[16px] drop-shadow-[0px_12px_14px_rgba(13,31,77,0.16)] canvas-item xl:text-[length:calc(16*var(--dp))]",
         step.theme.card,
       )}
       style={boxVars(step.position.left, step.position.top)}

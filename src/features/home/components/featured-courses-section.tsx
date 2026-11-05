@@ -7,7 +7,7 @@ import { SectionHeading } from "@/features/home/components/section-heading";
 import { FEATURED_COURSES } from "@/features/home/content";
 import { cn } from "@/lib/utils";
 
-const COURSE_BUTTON = "h-14 flex-1 rounded-full border-2 border-primary text-base font-bold";
+const COURSE_BUTTON = "h-14 flex-1 rounded-full border-2 border-primary px-4 text-base font-bold";
 
 export function FeaturedCoursesSection() {
   return (
@@ -17,18 +17,18 @@ export function FeaturedCoursesSection() {
           title="Các khóa học nổi bật"
           description="Từ những dự án đầu tiên với Scratch đến Python, Web và AI, mỗi chương trình là một bước trong hành trình phát triển của học viên."
         />
-        <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-5 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:scroll-px-0 lg:px-0">
+        <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-5 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0 lg:pb-0 xl:grid-cols-4">
           {FEATURED_COURSES.map((course) => (
             <li
               key={course.title}
-              className="relative flex w-[85%] max-w-104 shrink-0 snap-start flex-col gap-4 rounded-xl bg-white px-4 pt-4 pb-6"
+              className="relative flex w-[85%] max-w-104 shrink-0 snap-start flex-col gap-4 rounded-xl bg-white px-4 pt-4 pb-6 lg:w-auto lg:max-w-none"
             >
               <Image
                 src={course.image}
                 alt=""
                 width={384}
                 height={206}
-                sizes="384px"
+                sizes="(min-width: 1280px) 290px, (min-width: 1024px) 50vw, 85vw"
                 className="aspect-[384/206] w-full rounded-xl object-cover"
               />
               <div>
@@ -42,7 +42,7 @@ export function FeaturedCoursesSection() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto flex gap-4">
+              <div className="mt-auto flex flex-wrap gap-4">
                 <Link
                   href={course.href}
                   className={cn(

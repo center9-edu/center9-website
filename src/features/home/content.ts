@@ -217,10 +217,34 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer:
       "Center9Edu xây dựng lộ trình dành cho học sinh 8–18 tuổi, với nội dung phù hợp theo độ tuổi, năng lực và định hướng của từng học viên.",
   },
-  { question: "Con chưa từng học lập trình có theo kịp không?" },
-  { question: "Center9Edu đánh giá đầu vào như thế nào?" },
-  { question: "Con được trải nghiệm gì trong buổi học thử?" },
-  { question: "Center9Edu có hình thức học online hay offline?" },
-  { question: "Mỗi lớp có bao nhiêu học viên?" },
-  { question: "Học phí và chính sách học bù như thế nào?" },
+
+  {
+    question: "Con chưa từng học lập trình có theo kịp không?",
+    answer: "Lộ trình học từ con số 0 với khối lệnh trực quan giúp bé tiếp thu dễ dàng mà không cần nền tảng trước."
+  },
+
+  {
+    question: "Center9Edu đánh giá đầu vào như thế nào?",
+    answer: "Trung tâm đánh giá qua độ tuổi và buổi học thử 1:1 cùng giáo viên để xếp lớp đúng trình độ của bé."
+  },
+
+  {
+    question: "Con được trải nghiệm gì trong buổi học thử?",
+    answer: "Bé được làm quen giao diện lập trình, tự tay tạo một sản phẩm mini và nhận đánh giá năng lực chi tiết."
+  },
+
+  {
+    question: "Center9Edu có hình thức học online hay offline?",
+    answer: "Trung tâm giảng dạy 100% Online tương tác trực tiếp, giáo viên kèm cặp và sửa bài xuyên suốt buổi học."
+  },
+
+  {
+    question: "Mỗi lớp có bao nhiêu học viên?",
+    answer: "Lớp duy trì mô hình nhỏ từ 4 đến 6 học viên để đảm bảo chất lượng tương tác tốt nhất."
+  },
+
+  {
+    question: "Học phí và chính sách học bù như thế nào?",
+    answer: "Học phí đóng theo khóa, bé nghỉ có báo trước sẽ được gửi video buổi học hoặc sắp xếp học bù linh hoạt."
+  },
 ];

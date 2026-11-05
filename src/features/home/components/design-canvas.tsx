@@ -20,8 +20,8 @@ export function box(left: number, top: number, width?: number, height?: number):
   };
 }
 
-// Exposes the position as CSS variables so it can be applied only at a breakpoint, e.g.
-// `lg:absolute lg:left-(--x) lg:top-(--y)`, letting the element stay in normal flow on mobile.
+// Exposes the position as CSS variables for the `canvas-item` utility, so the element is only
+// positioned from `xl` and stays in normal flow on smaller screens.
 export function boxVars(left: number, top: number): CSSProperties {
   return { "--x": dp(left), "--y": dp(top) } as CSSProperties;
 }
@@ -29,17 +29,22 @@ export function boxVars(left: number, top: number): CSSProperties {
 type DesignCanvasProps = {
   height: number;
   children: ReactNode;
+  /** Layout of the stacked fallback below `xl` (gap, padding, alignment). */
   className?: string;
 };
 
 /**
- * Renders as a normal block on small screens and as a scaled, absolutely positioned
- * Figma canvas from the `lg` breakpoint.
+ * Renders as a stacked, padded column on small screens and as a scaled, absolutely
+ * positioned Figma canvas (at most 1440px wide) from the `xl` breakpoint.
  */
 export function DesignCanvas({ height, children, className }: DesignCanvasProps) {
   return (
     <div
-      className={cn("relative lg:@container lg:overflow-hidden lg:aspect-(--ratio)", className)}
+      className={cn(
+        "container-page relative flex flex-col",
+        className,
+        "xl:@container xl:block xl:aspect-(--ratio) xl:max-w-360 xl:overflow-hidden xl:px-0 xl:py-0",
+      )}
       style={
         {
           "--ratio": `${DESIGN_WIDTH} / ${height}`,

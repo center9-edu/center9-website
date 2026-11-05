@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 bg-navy text-navy-foreground">
+    <header className="sticky top-0 z-50 bg-navy text-navy-foreground [--ring:white]">
       <div className="container-page relative flex h-18 items-center justify-between gap-6 lg:h-27">
         <SiteLogo className="h-12 lg:h-17" />
 

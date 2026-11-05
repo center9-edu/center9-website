@@ -16,8 +16,8 @@ export function CtaSection() {
         className="absolute top-0 left-1/2 hidden max-w-none -translate-x-1/2 lg:block"
       />
       <div className="container-page relative py-10 lg:py-9.5">
-        <div className="relative flex flex-col overflow-hidden rounded-[40px] bg-navy px-6 pt-12 sm:px-10 lg:min-h-111.5 lg:overflow-visible lg:px-15 lg:py-20">
-          <div className="relative z-10 flex flex-col items-start gap-8 lg:max-w-[52%] xl:max-w-none">
+        <div className="relative flex flex-col overflow-hidden rounded-[40px] bg-navy px-6 pt-12 [--ring:white] sm:px-10 lg:min-h-111.5 lg:overflow-visible lg:px-15 lg:py-20">
+          <div className="relative z-10 flex flex-col items-start gap-8 lg:max-w-[48%]">
             <h2 className="max-w-175 text-3xl/[1.2] font-bold text-white sm:text-[48px]/[1.2]">
               Bắt đầu hành trình công nghệ của con từ hôm nay
             </h2>
@@ -25,11 +25,8 @@ export function CtaSection() {
               Đăng ký buổi học thử để con trải nghiệm lập trình và nhận tư vấn lộ trình phù hợp.
             </p>
             <Link
-              href="#"
-              className={cn(
-                buttonVariants({ variant: "cta" }),
-                "h-14 px-8 text-base font-bold text-white",
-              )}
+              href={TRIAL_CTA.href}
+              className={cn(buttonVariants({ variant: "cta" }), "h-14 px-8 text-base font-bold")}
             >
               {TRIAL_CTA.label}
             </Link>

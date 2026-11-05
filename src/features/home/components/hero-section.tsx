@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const BENEFITS = [
   { label: "Tư vấn lộ trình miễn phí", icon: "/images/home/icon-routing.svg" },
   { label: "Học thử 1:1", icon: "/images/home/icon-folder.svg" },
-  { label: "Đánh giá đầu vào", icon: "/images/home/icon-teacher.svg" },
+  { label: "Đánh giá đầu vào", icon: "/images/home/icon-teacher.svg", },
 ];
 
 export function HeroSection() {
@@ -18,13 +18,11 @@ export function HeroSection() {
         <div className="flex flex-col items-start gap-10 lg:gap-16">
           <div className="flex flex-col items-start gap-6 lg:gap-8">
             <p className="inline-flex items-center gap-2.5 rounded-full bg-[#ebedff] px-4.5 py-2 text-sm/[1.4] font-semibold text-[#00095f] sm:text-base/[1.4]">
-              <Image src="/images/home/icon-code.svg" alt="" width={22} height={22} />
+              <Image src="/images/home/icon-code.svg" alt="" width={22} height={22} className="select-none pointer-events-none" />
               LẬP TRÌNH & CÔNG NGHỆ CHO HỌC SINH 7–18 TUỔI
             </p>
-            <h1 className="text-3xl/[1.4] font-bold text-[#00095f] sm:text-[40px]/[1.4] lg:text-[34px]/[1.4] xl:text-[40px]/[1.4]">
-              Giúp con tư duy, sáng tạo <br className="hidden sm:inline" />
-              và làm chủ công nghệ <br className="hidden sm:inline" />
-              trong thời đại AI.
+            <h1 className="text-3xl/[1.4] font-bold text-balance text-[#00095f] sm:text-[40px]/[1.4] lg:text-[34px]/[1.4] xl:text-[40px]/[1.4]">
+              Giúp con tư duy, sáng tạo và làm chủ công nghệ trong thời đại AI.
             </h1>
             <ul className="flex flex-wrap gap-x-6.5 gap-y-3 text-sm/[1.4] text-ink-body">
               {BENEFITS.map((benefit) => (
@@ -74,14 +72,6 @@ export function HeroSection() {
               />
             </div>
           </div>
-          <div
-            aria-hidden
-            className="absolute top-[43.2%] left-[8.8%] hidden w-[30%] min-w-max flex-col gap-2 rounded-[14px] bg-[#081229] p-4.5 font-medium shadow-[0px_8px_18px_0px_rgba(8,20,51,0.18)] sm:flex"
-          >
-            <span className="text-sm text-[#f2b2e5]">for i in range(5):</span>
-            <span className="text-[13px] whitespace-pre text-[#a6c7ff]">{"  if i % 2 == 0:"}</span>
-            <span className="text-[13px] whitespace-pre text-[#ffdb33]">{"    print(i)"}</span>
-          </div>
           <div className="absolute top-[13.18%] left-[-13.68%] h-[86.82%] w-[111.62%] overflow-hidden">
             <div className="relative h-[105.41%] w-full">
               <Image
@@ -90,7 +80,7 @@ export function HeroSection() {
                 fill
                 priority
                 sizes="(min-width: 1024px) 760px, 112vw"
-                className="object-cover"
+                className="select-none pointer-events-none object-cover"
               />
             </div>
           </div>

@@ -11,7 +11,6 @@ type RoadmapCardData = {
   /** Step number shown inside the card on small screens, where the big numbers are hidden. */
   step?: string;
   className: string;
-  descriptionClassName?: string;
   tagClassName?: string;
   position: [left: number, top: number];
 };
@@ -67,7 +66,7 @@ const STAGE_FOUNDATION = {
       title: "Computer Science",
       description:
         "Hiểu cách thuật toán xử lý dữ liệu, cách máy tính và Internet vận hành, cùng các vấn đề về bảo mật và tác động của công nghệ.",
-      className: "bg-[#c9b7ff] lg:rotate-[0.7deg]",
+      className: "bg-[#c9b7ff] xl:rotate-[0.7deg]",
       position: [835.2, 472.9],
     },
   ] satisfies RoadmapCardData[],
@@ -93,7 +92,6 @@ const STAGE_PATHWAYS = {
       title: "Web & App",
       description: "Phát triển Website & Ứng dụng",
       className: "bg-[#a8b0ff]",
-      descriptionClassName: "text-white",
       position: [145, 145],
     },
     {
@@ -115,7 +113,6 @@ const STAGE_PATHWAYS = {
       title: "Data & AI",
       description: "Dữ liệu & Trí tuệ nhân tạo",
       className: "bg-[#ff84b2]",
-      descriptionClassName: "text-white",
       position: [85, 601],
     },
     {
@@ -152,13 +149,12 @@ const STAGE_SPECIALIZATION = {
   ] satisfies RoadmapCardData[],
 };
 
-const CANVAS_CLASS =
-  "container-page flex flex-col items-center gap-5 lg:mx-auto lg:block lg:max-w-360 lg:px-0";
+const CANVAS_CLASS = "items-center gap-5";
 
 export function RoadmapSection() {
   return (
-    <section className="overflow-hidden bg-white pb-12 select-none lg:pb-0">
-      <div className="container-page pt-12 pb-10 lg:pt-20 lg:pb-0">
+    <section className="overflow-hidden bg-white pb-12 select-none xl:pb-0">
+      <div className="container-page pt-12 pb-10 lg:pt-20 xl:pb-0">
         <SectionHeading
           title="Hành trình phát triển năng lực công nghệ 8–18 tuổi"
           description={
@@ -173,24 +169,24 @@ export function RoadmapSection() {
         />
       </div>
 
-      <DesignCanvas height={STAGE_FOUNDATION.height} className={cn(CANVAS_CLASS, "lg:mt-[min(8.2vw,118px)]")}>
+      <DesignCanvas height={STAGE_FOUNDATION.height} className={cn(CANVAS_CLASS, "xl:mt-[min(8.2vw,118px)]")}>
         <Decorations items={STAGE_FOUNDATION.decorations} />
         <BigNumbers items={STAGE_FOUNDATION.numbers} />
         <RoadmapCards items={STAGE_FOUNDATION.cards} />
       </DesignCanvas>
 
-      <DesignCanvas height={STAGE_PATHWAYS.height} className={cn(CANVAS_CLASS, "mt-10 lg:mt-0")}>
+      <DesignCanvas height={STAGE_PATHWAYS.height} className={cn(CANVAS_CLASS, "mt-10 xl:mt-0")}>
         <Decorations items={STAGE_PATHWAYS.decorations} />
         {/* Figma: "04" at y 388 and the label box 246 × 84 at (597, 538), both centred on x 720. */}
-        <p className="flex flex-col items-center text-center text-black lg:contents">
+        <p className="flex flex-col items-center text-center text-black xl:contents">
           <span
-            className="text-6xl font-semibold lg:absolute lg:top-(--y) lg:left-(--x) lg:w-[calc(246*var(--dp))] lg:text-[length:calc(149.5*var(--dp))]/[1.05]"
+            className="text-6xl font-semibold canvas-item xl:w-[calc(246*var(--dp))] xl:text-[length:calc(149.5*var(--dp))]/[1.05]"
             style={boxVars(597, 388)}
           >
             04
           </span>
           <span
-            className="flex flex-col text-2xl/[1.05] font-bold lg:absolute lg:top-(--y) lg:left-(--x) lg:w-[calc(246*var(--dp))] lg:text-[length:calc(36*var(--dp))]/[1.167]"
+            className="flex flex-col text-2xl/[1.05] font-bold canvas-item xl:w-[calc(246*var(--dp))] xl:text-[length:calc(36*var(--dp))]/[1.167]"
             style={boxVars(597, 538)}
           >
             <span className="whitespace-nowrap">Technology</span>
@@ -202,19 +198,19 @@ export function RoadmapSection() {
 
       <DesignCanvas
         height={STAGE_SPECIALIZATION.height}
-        className={cn(CANVAS_CLASS, "mt-10 lg:mt-0")}
+        className={cn(CANVAS_CLASS, "mt-10 xl:mt-0")}
       >
         <Decorations items={STAGE_SPECIALIZATION.decorations} />
         <BigNumbers items={STAGE_SPECIALIZATION.numbers} />
         <RoadmapCards items={STAGE_SPECIALIZATION.cards} />
         <div
-          className="mt-6 flex w-full max-w-[21.786rem] flex-col gap-3 lg:absolute lg:top-(--y) lg:left-(--x) lg:mt-0 lg:w-[calc(470*var(--dp))] lg:max-w-none"
+          className="mt-6 flex w-full max-w-[21.786rem] flex-col gap-3 canvas-item xl:mt-0 xl:w-[calc(470*var(--dp))] xl:max-w-none"
           style={boxVars(880, 744)}
         >
-          <h3 className="text-2xl/[1.4] font-semibold text-navy lg:text-[length:calc(44*var(--dp))]/[1.4]">
+          <h3 className="text-2xl/[1.4] font-semibold text-navy xl:text-[length:calc(44*var(--dp))]/[1.4]">
             Hành trang tương lai
           </h3>
-          <p className="text-[17px]/[22px] tracking-[-0.24px] text-ink-muted lg:text-[length:calc(17*var(--dp))]/[1.294]">
+          <p className="text-[17px]/[22px] tracking-[-0.24px] text-ink-muted xl:text-[length:calc(17*var(--dp))]/[1.294]">
             Dự án thực tế → Portfolio cá nhân → <br />
             Cuộc thi công nghệ → <br />
             Định hướng đại học & nghề nghiệp
@@ -236,7 +232,7 @@ function Decorations({ items }: { items: Decoration[] }) {
         width={Math.round(width)}
         height={Math.round(height)}
         draggable={false}
-        className={cn("absolute hidden max-w-none lg:block", item.className)}
+        className={cn("absolute hidden max-w-none xl:block", item.className)}
         style={box(left, top, width, height)}
       />
     );
@@ -248,7 +244,7 @@ function BigNumbers({ items }: { items: BigNumber[] }) {
     <span
       key={item.value}
       aria-hidden
-      className="absolute hidden -translate-x-1/2 text-[length:calc(128*var(--dp))]/normal font-semibold text-black lg:block"
+      className="absolute hidden -translate-x-1/2 text-[length:calc(128*var(--dp))]/normal font-semibold text-black xl:block"
       style={box(item.centerX, item.top)}
     >
       {item.value}
@@ -264,7 +260,7 @@ function RoadmapCards({ items }: { items: RoadmapCardData[] }) {
         <li
           key={card.title}
           className={cn(
-            "flex min-h-[12.571em] w-full max-w-[21.786em] flex-col gap-[0.714em] rounded-[1.571em] border-[0.143em] border-white px-[1.571em] py-[1.714em] text-[14px] drop-shadow-[0px_5px_6px_rgba(7,29,58,0.1)] lg:absolute lg:top-(--y) lg:left-(--x) lg:text-[length:calc(14*var(--dp))]",
+            "flex min-h-[12.571em] w-full max-w-[21.786em] flex-col gap-[0.714em] rounded-[1.571em] border-[0.143em] border-white px-[1.571em] py-[1.714em] text-[14px] drop-shadow-[0px_5px_6px_rgba(7,29,58,0.1)] canvas-item xl:text-[length:calc(14*var(--dp))]",
             card.className,
           )}
           style={boxVars(card.position[0], card.position[1])}
@@ -275,11 +271,11 @@ function RoadmapCards({ items }: { items: RoadmapCardData[] }) {
               card.tagClassName,
             )}
           >
-            {card.step ? <span className="lg:hidden">{card.step} · </span> : null}
+            {card.step ? <span className="xl:hidden">{card.step} · </span> : null}
             {card.tag}
           </span>
           <h3 className="text-[1.5em] font-semibold text-navy">{card.title}</h3>
-          <p className={cn("leading-[1.2] text-ink-muted", card.descriptionClassName)}>
+          <p className="leading-[1.2] text-navy">
             {card.description}
           </p>
         </li>
