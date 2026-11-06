@@ -6,6 +6,7 @@ import {
   STUDENT_PROJECTS,
   type StudentProject,
 } from "@/features/home/content";
+import { cn } from "@/lib/utils";
 
 export function StudentProjectsSection() {
   return (
@@ -14,7 +15,11 @@ export function StudentProjectsSection() {
         <SectionHeading title="Sản phẩm học viên" />
         <div className="grid gap-6 lg:grid-cols-[848fr_412fr] lg:gap-4">
           <figure className="flex flex-col gap-2 lg:gap-6">
-            <ProjectImage project={FEATURED_PROJECT} sizes="(min-width: 1024px) 848px, 100vw" />
+            <ProjectImage
+              project={FEATURED_PROJECT}
+              featured
+              sizes="(min-width: 1024px) 848px, 100vw"
+            />
             <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-2 py-2 text-2xl/[1.4] font-medium text-navy lg:py-6 lg:text-4xl/[1.4]">
               <span className="border-b border-[#f0f0f0]">{FEATURED_PROJECT.title}</span>
               <span className="text-base font-medium text-ink-muted italic">của</span>
@@ -53,17 +58,21 @@ export function StudentProjectsSection() {
   );
 }
 
-// Hovering reveals the dark overlay with the project name (Figma "item showcase" on state).
-function ProjectImage({ project, sizes }: { project: StudentProject; sizes: string }) {
-  const isFeatured = project === FEATURED_PROJECT;
+type ProjectImageProps = {
+  project: StudentProject;
+  sizes: string;
+  /** The large showcase image uses the wider Figma ratio. */
+  featured?: boolean;
+};
 
+// Hovering reveals the dark overlay with the project name (Figma "item showcase" on state).
+function ProjectImage({ project, sizes, featured = false }: ProjectImageProps) {
   return (
     <div
-      className={
-        isFeatured
-          ? "group relative aspect-[848/568] overflow-hidden rounded-[20px] bg-[#808080]"
-          : "group relative aspect-[412/288] overflow-hidden rounded-[20px] bg-[#808080]"
-      }
+      className={cn(
+        "group relative overflow-hidden rounded-[20px] bg-[#808080]",
+        featured ? "aspect-[848/568]" : "aspect-[412/288]",
+      )}
     >
       <Image
         src={project.image}
