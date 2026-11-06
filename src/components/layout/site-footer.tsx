@@ -9,7 +9,7 @@ export async function SiteFooter() {
   cacheLife("days");
 
   return (
-    <footer className="bg-navy text-navy-foreground">
+    <footer className="bg-navy text-navy-foreground [--ring:white]">
       <div className="container-page flex flex-col items-center gap-10 pt-12 pb-10 lg:pt-20">
         <div className="flex w-full flex-col gap-10 border-y border-white/24 py-10 lg:flex-row lg:justify-between">
           <div className="flex flex-col gap-6 lg:max-w-md lg:py-4">

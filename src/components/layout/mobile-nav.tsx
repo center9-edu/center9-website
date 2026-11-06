@@ -37,7 +37,7 @@ export function MobileNav({ items, cta }: MobileNavProps) {
       >
         <ul className="container-page flex flex-col py-4">
           {items.map((item) => (
-            <li key={item.href}>
+            <li key={item.label}>
               <Link
                 href={item.href}
                 onClick={() => setOpen(false)}

@@ -11,6 +11,9 @@
   --color-navy-foreground: var(--navy-foreground);
   --color-cta: var(--cta);
   --color-cta-foreground: var(--cta-foreground);
+  --color-brand-blue: var(--brand-blue);
+  --color-ink-body: var(--ink-body);
+  --color-ink-muted: var(--ink-muted);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -70,7 +73,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: var(--brand-blue);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -82,6 +85,9 @@
   --navy-foreground: #ffffff;
   --cta: #ff8f00;
   --cta-foreground: #071d3a;
+  --brand-blue: #264df2;
+  --ink-body: #474f66;
+  --ink-muted: #6b7385;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -128,7 +134,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring;
   }
   body {
     @apply bg-background text-foreground;
@@ -140,4 +146,13 @@
 
 @utility container-page {
   @apply mx-auto w-full max-w-336 px-4 sm:px-6 lg:px-8;
+}
+
+/* Positions a DesignCanvas child at the --x/--y set by boxVars(); in normal flow below xl. */
+@utility canvas-item {
+  @variant xl {
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+  }
 }

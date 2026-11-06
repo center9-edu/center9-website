@@ -8,14 +8,14 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 bg-navy text-navy-foreground">
+    <header className="sticky top-0 z-50 bg-navy text-navy-foreground [--ring:white]">
       <div className="container-page relative flex h-18 items-center justify-between gap-6 lg:h-27">
         <SiteLogo className="h-12 lg:h-17" />
 
         <nav aria-label="Menu chính" className="hidden xl:block">
           <ul className="flex gap-6 text-xl font-semibold tracking-[0.01em] text-white/60">
             {MAIN_NAV.map((item) => (
-              <li key={item.href}>
+              <li key={item.label}>
                 <Link href={item.href} className="transition-colors hover:text-white">
                   {item.label}
                 </Link>
