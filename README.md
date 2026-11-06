@@ -26,6 +26,13 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Environment variables
+
+Copy `.env.example` to `.env.local` and fill in the values. The trial registration form
+(`/dang-ky-hoc-thu`) needs `GOOGLE_SHEETS_WEBHOOK_URL` and `GOOGLE_SHEETS_WEBHOOK_SECRET`, plus
+`SLACK_WEBHOOK_URL` for Slack notifications; see
+[docs/trial-registration-google-sheet.md](docs/trial-registration-google-sheet.md).
+
 ## Scripts
 
 | Command | Description |

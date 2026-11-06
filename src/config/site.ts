@@ -25,7 +25,7 @@ export const MAIN_NAV: NavItem[] = [
 
 export const TRIAL_CTA: NavItem = {
   label: "Đăng ký học thử",
-  href: "#",
+  href: "/dang-ky-hoc-thu",
 };
 
 // Social links have no `href` yet; they render as plain text until the URLs are confirmed.
