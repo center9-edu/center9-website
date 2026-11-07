@@ -49,7 +49,7 @@ function JourneyCard({ step }: { step: JourneyStep }) {
   return (
     <li
       className={cn(
-        "relative w-full max-w-[22.6875em] rounded-[2em] border-4 border-white px-[1.25em] pt-[6.75em] pb-[1.75em] text-[16px] drop-shadow-[0px_12px_14px_rgba(13,31,77,0.16)] canvas-item xl:text-[length:calc(16*var(--dp))]",
+        "w-full max-w-[22.6875em] rounded-[2em] max-xl:relative border-4 border-white px-[1.25em] pt-[6.75em] pb-[1.75em] text-[16px] drop-shadow-[0px_12px_14px_rgba(13,31,77,0.16)] canvas-item xl:h-[26.75em] xl:text-[length:calc(16*var(--dp))]",
         step.theme.card,
       )}
       style={boxVars(step.position.left, step.position.top)}
@@ -75,7 +75,8 @@ function JourneyCard({ step }: { step: JourneyStep }) {
           className="size-[3em]"
         />
       </span>
-      <div className="flex min-h-[18.25em] flex-col gap-[1em] rounded-[2.5em] bg-white px-[1em] pt-[2em] pb-[2.5em]">
+      {/* Figma: card 363 × 428, white panel 292 tall; the panel height is fixed from xl. */}
+      <div className="flex min-h-[18.25em] flex-col gap-[1em] rounded-[2.5em] bg-white px-[1em] pt-[2em] pb-[2.5em] xl:h-[18.25em] xl:pb-0">
         <span className={cn("text-[5em]/[1.2] font-medium tracking-[-0.3px]", step.theme.text)}>
           {step.number}
         </span>

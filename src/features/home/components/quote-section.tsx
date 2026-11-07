@@ -44,7 +44,7 @@ export function QuoteSection() {
           </blockquote>
           <figcaption className="flex items-end gap-4 xl:contents">
             <div
-              className="relative size-32 shrink-0 bg-white canvas-item xl:size-[calc(254*var(--dp))]"
+              className="size-32 shrink-0 bg-white max-xl:relative canvas-item xl:size-[calc(254*var(--dp))]"
               style={boxVars(868, 404)}
             >
               <Image
