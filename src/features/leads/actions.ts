@@ -1,5 +1,7 @@
 "use server";
 
+import { after } from "next/server";
+
 import {
   normalizePhone,
   validateTrialRegistration,
@@ -121,15 +123,16 @@ export async function submitTrialRegistration(
     };
   }
 
-  // The registration is already saved; a failed notification must not fail the submit.
-  try {
-    await postSlackMessage(buildSlackMessage(values));
-  } catch (error) {
-    console.error(
-      "[trial-registration] Failed to notify Slack:",
-      error instanceof Error ? error.message : "unknown error",
-    );
-  }
+  // Notify Slack after the response is sent so parents don't wait on it; a failure must not
+  // fail the already-saved registration.
+  after(() =>
+    postSlackMessage(buildSlackMessage(values)).catch((error: unknown) => {
+      console.error(
+        "[trial-registration] Failed to notify Slack:",
+        error instanceof Error ? error.message : "unknown error",
+      );
+    }),
+  );
 
   return { status: "success", submissionId: crypto.randomUUID() };
 }

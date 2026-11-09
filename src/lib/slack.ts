@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // Server-side helper for Slack incoming webhooks. Never import this from client components:
 // the webhook URL is a secret.
 
@@ -13,15 +15,6 @@ export async function postSlackMessage(text: string) {
     throw new Error("SLACK_WEBHOOK_URL is not configured");
   }
 
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text }),
-    signal: AbortSignal.timeout(5_000),
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Slack responded with status ${response.status}`);
-  }
+  // axios rejects on non-2xx responses and timeouts.
+  await axios.post(webhookUrl, { text }, { timeout: 5_000 });
 }

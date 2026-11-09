@@ -1,5 +1,7 @@
 // Shared definitions for the free trial registration form (client and server).
 
+import { z } from "zod";
+
 export const FIELD_LIMITS = {
   parentName: 100,
   studentName: 100,
@@ -33,53 +35,55 @@ export type TrialRegistrationState =
 
 // Vietnamese mobile or landline: 0 + 9–10 digits, or the same with the 84 / +84 prefix.
 const PHONE_PATTERN = /^(?:0|\+?84)\d{9,10}$/;
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function normalizePhone(phone: string) {
   return phone.replace(/[\s.()-]/g, "");
 }
 
+const STUDENT_AGE_ERROR = "Tuổi học viên phải là một số, ví dụ: 10.";
+const EMAIL_ERROR = "Email chưa đúng định dạng (ví dụ: tenban@gmail.com).";
+
+const trialRegistrationSchema = z.object({
+  parentName: z
+    .string()
+    .min(1, "Vui lòng nhập họ và tên phụ huynh.")
+    .max(FIELD_LIMITS.parentName, `Họ và tên tối đa ${FIELD_LIMITS.parentName} ký tự.`),
+  phone: z
+    .string()
+    .min(1, "Vui lòng nhập số điện thoại.")
+    .refine(
+      (phone) => PHONE_PATTERN.test(normalizePhone(phone)),
+      "Số điện thoại chưa đúng định dạng (ví dụ: 0368684695).",
+    ),
+  studentName: z
+    .string()
+    .min(1, "Vui lòng nhập tên học viên.")
+    .max(FIELD_LIMITS.studentName, `Tên học viên tối đa ${FIELD_LIMITS.studentName} ký tự.`),
+  studentAge: z
+    .string()
+    .min(1, "Vui lòng nhập tuổi học viên.")
+    .regex(/^\d+$/, STUDENT_AGE_ERROR)
+    .refine(
+      (age) => Number(age) >= STUDENT_AGE_RANGE.min && Number(age) <= STUDENT_AGE_RANGE.max,
+      STUDENT_AGE_ERROR,
+    ),
+  email: z
+    .string()
+    .min(1, "Vui lòng nhập email.")
+    .max(FIELD_LIMITS.email, EMAIL_ERROR)
+    .pipe(z.email(EMAIL_ERROR)),
+  note: z.string().max(FIELD_LIMITS.note, `Ghi chú tối đa ${FIELD_LIMITS.note} ký tự.`),
+}) satisfies z.ZodType<TrialRegistrationValues>;
+
+/** Returns the first error message of each invalid field (empty when valid). */
 export function validateTrialRegistration(values: TrialRegistrationValues) {
+  const result = trialRegistrationSchema.safeParse(values);
+  if (result.success) return {};
+
+  const { fieldErrors } = z.flattenError(result.error);
   const errors: Partial<Record<TrialRegistrationField, string>> = {};
-
-  if (!values.parentName) {
-    errors.parentName = "Vui lòng nhập họ và tên phụ huynh.";
-  } else if (values.parentName.length > FIELD_LIMITS.parentName) {
-    errors.parentName = `Họ và tên tối đa ${FIELD_LIMITS.parentName} ký tự.`;
+  for (const [field, messages] of Object.entries(fieldErrors)) {
+    if (messages?.[0]) errors[field as TrialRegistrationField] = messages[0];
   }
-
-  if (!values.phone) {
-    errors.phone = "Vui lòng nhập số điện thoại.";
-  } else if (!PHONE_PATTERN.test(normalizePhone(values.phone))) {
-    errors.phone = "Số điện thoại chưa đúng định dạng (ví dụ: 0368684695).";
-  }
-
-  if (!values.studentName) {
-    errors.studentName = "Vui lòng nhập tên học viên.";
-  } else if (values.studentName.length > FIELD_LIMITS.studentName) {
-    errors.studentName = `Tên học viên tối đa ${FIELD_LIMITS.studentName} ký tự.`;
-  }
-
-  const age = Number(values.studentAge);
-  if (!values.studentAge) {
-    errors.studentAge = "Vui lòng nhập tuổi học viên.";
-  } else if (
-    !/^\d+$/.test(values.studentAge) ||
-    age < STUDENT_AGE_RANGE.min ||
-    age > STUDENT_AGE_RANGE.max
-  ) {
-    errors.studentAge = "Tuổi học viên phải là một số, ví dụ: 10.";
-  }
-
-  if (!values.email) {
-    errors.email = "Vui lòng nhập email.";
-  } else if (values.email.length > FIELD_LIMITS.email || !EMAIL_PATTERN.test(values.email)) {
-    errors.email = "Email chưa đúng định dạng (ví dụ: tenban@gmail.com).";
-  }
-
-  if (values.note.length > FIELD_LIMITS.note) {
-    errors.note = `Ghi chú tối đa ${FIELD_LIMITS.note} ký tự.`;
-  }
-
   return errors;
 }
