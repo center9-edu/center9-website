@@ -34,10 +34,44 @@ function escapeSpreadsheetValue(value: string) {
   return /^[=+\-@]/.test(value) ? `'${value}` : value;
 }
 
-function buildSlackMessage(values: TrialRegistrationValues) {
+// Log only the failure reason, never the submitted personal data.
+function logFailure(action: string, error: unknown) {
+  console.error(
+    `[trial-registration] Failed to ${action}:`,
+    error instanceof Error ? error.message : "unknown error",
+  );
+}
+
+async function saveToSheet(url: string, secret: string, values: TrialRegistrationValues) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      secret,
+      submittedAt: new Date().toISOString(),
+      parentName: escapeSpreadsheetValue(values.parentName),
+      phone: normalizePhone(values.phone),
+      studentName: escapeSpreadsheetValue(values.studentName),
+      studentAge: Number(values.studentAge),
+      email: escapeSpreadsheetValue(values.email.toLowerCase()),
+      note: escapeSpreadsheetValue(values.note),
+    }),
+    signal: AbortSignal.timeout(10_000),
+    cache: "no-store",
+  });
+  const result: unknown = await response.json();
+
+  if (!response.ok || (result as { ok?: unknown })?.ok !== true) {
+    throw new Error(`Webhook responded with status ${response.status}`);
+  }
+}
+
+function buildSlackMessage(values: TrialRegistrationValues, savedToSheet: boolean) {
   const safe = (value: string) => escapeSlackText(value);
   const lines = [
-    "*Có đăng ký học thử mới*",
+    savedToSheet
+      ? "*Có đăng ký học thử mới*"
+      : "*Có đăng ký học thử mới* (chưa lưu được vào Google Sheet, cần nhập tay)",
     `• *Phụ huynh:* ${safe(values.parentName)}`,
     `• *Số điện thoại:* ${safe(normalizePhone(values.phone))}`,
     `• *Học viên:* ${safe(values.studentName)} (${values.studentAge} tuổi)`,
@@ -86,53 +120,23 @@ export async function submitTrialRegistration(
     };
   }
 
-  try {
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        secret: webhookSecret,
-        submittedAt: new Date().toISOString(),
-        parentName: escapeSpreadsheetValue(values.parentName),
-        phone: normalizePhone(values.phone),
-        studentName: escapeSpreadsheetValue(values.studentName),
-        studentAge: Number(values.studentAge),
-        email: escapeSpreadsheetValue(values.email.toLowerCase()),
-        note: escapeSpreadsheetValue(values.note),
-      }),
-      signal: AbortSignal.timeout(10_000),
-      cache: "no-store",
-    });
-    const result: unknown = await response.json();
-
-    if (!response.ok || (result as { ok?: unknown })?.ok !== true) {
-      throw new Error(`Webhook responded with status ${response.status}`);
+  // Save and notify after the response is sent so parents don't wait on either webhook.
+  // The Slack message carries the full registration, so it is not lost if the sheet fails.
+  after(async () => {
+    let savedToSheet = true;
+    try {
+      await saveToSheet(webhookUrl, webhookSecret, values);
+    } catch (error) {
+      savedToSheet = false;
+      logFailure("save registration to Google Sheets", error);
     }
-  } catch (error) {
-    // Log only the failure reason, never the submitted personal data.
-    console.error(
-      "[trial-registration] Failed to save registration:",
-      error instanceof Error ? error.message : "unknown error",
-    );
-    return {
-      status: "error",
-      attemptId: crypto.randomUUID(),
-      message: "Chưa gửi được đăng ký. Ba mẹ vui lòng thử lại sau ít phút hoặc gọi hotline.",
-      fieldErrors: {},
-      values,
-    };
-  }
 
-  // Notify Slack after the response is sent so parents don't wait on it; a failure must not
-  // fail the already-saved registration.
-  after(() =>
-    postSlackMessage(buildSlackMessage(values)).catch((error: unknown) => {
-      console.error(
-        "[trial-registration] Failed to notify Slack:",
-        error instanceof Error ? error.message : "unknown error",
-      );
-    }),
-  );
+    try {
+      await postSlackMessage(buildSlackMessage(values, savedToSheet));
+    } catch (error) {
+      logFailure("notify Slack", error);
+    }
+  });
 
   return { status: "success", submissionId: crypto.randomUUID() };
 }
