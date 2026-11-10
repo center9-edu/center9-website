@@ -148,7 +148,8 @@
   @apply mx-auto w-full max-w-336 px-4 sm:px-6 lg:px-8;
 }
 
-/* Positions a DesignCanvas child at the --x/--y set by boxVars(); in normal flow below xl. */
+/* Positions a DesignCanvas child at the --x/--y set by boxVars(); in normal flow below xl.
+   Do not combine with `relative` (it wins in the cascade); use `max-xl:relative` instead. */
 @utility canvas-item {
   @variant xl {
     position: absolute;
