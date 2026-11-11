@@ -1,0 +1,13 @@
+import { IconBase, type IconProps } from "@/components/shared/icons/icon-base";
+
+export function TeacherIcon(props: IconProps) {
+  return (
+    <IconBase size={18} viewBox="0 0 18 18" {...props}>
+      <g stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7.5375 1.8975L3.0225 4.845C1.575 5.79 1.575 7.905 3.0225 8.85L7.5375 11.7975C8.3475 12.33 9.6825 12.33 10.4925 11.7975L14.985 8.85C16.425 7.905 16.425 5.7975 14.985 4.8525L10.4925 1.905C9.6825 1.365 8.3475 1.365 7.5375 1.8975Z" />
+        <path d="M4.2225 9.81L4.215 13.3275C4.215 14.28 4.95 15.3 5.85 15.6L8.2425 16.395C8.655 16.53 9.3375 16.53 9.7575 16.395L12.15 15.6C13.05 15.3 13.785 14.28 13.785 13.3275V9.8475" />
+        <path d="M16.05 11.25V6.75" />
+      </g>
+    </IconBase>
+  );
+}

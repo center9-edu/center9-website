@@ -1,5 +1,5 @@
-import Image from "next/image";
-
+import { MinusIcon } from "@/components/shared/icons/minus-icon";
+import { PlusIcon } from "@/components/shared/icons/plus-icon";
 import { SectionHeading } from "@/features/home/components/section-heading";
 import { FAQ_ITEMS } from "@/features/home/content";
 
@@ -18,20 +18,8 @@ export function FaqSection() {
                 <details open={index === 0} className={`group ${ITEM_CLASS}`}>
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-lg/6 font-medium tracking-[-0.176px] text-black [&::-webkit-details-marker]:hidden">
                     {item.question}
-                    <Image
-                      src="/images/home/icon-plus.svg"
-                      alt=""
-                      width={24}
-                      height={24}
-                      className="shrink-0 group-open:hidden"
-                    />
-                    <Image
-                      src="/images/home/icon-minus.svg"
-                      alt=""
-                      width={24}
-                      height={24}
-                      className="hidden shrink-0 group-open:block"
-                    />
+                    <PlusIcon className="shrink-0 text-primary group-open:hidden" />
+                    <MinusIcon className="hidden shrink-0 text-primary group-open:block" />
                   </summary>
                   <p className="mt-3 text-base/6 tracking-[-0.176px] text-black">{item.answer}</p>
                 </details>

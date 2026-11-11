@@ -1,0 +1,13 @@
+import { IconBase, type IconProps } from "@/components/shared/icons/icon-base";
+
+export function ArrowCircleRightIcon(props: IconProps) {
+  return (
+    <IconBase size={22} viewBox="0 0 22 22" {...props}>
+      <g stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20.1667 11C20.1667 16.0626 16.0626 20.1667 11 20.1667C5.93739 20.1667 1.83333 16.0626 1.83333 11C1.83333 5.93739 5.93739 1.83333 11 1.83333C16.0626 1.83333 20.1667 5.93739 20.1667 11Z" />
+        <path d="M7.79167 11H13.2917" />
+        <path d="M11.4583 13.75L14.2083 11L11.4583 8.25" />
+      </g>
+    </IconBase>
+  );
+}

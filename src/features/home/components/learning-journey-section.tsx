@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { CalendarEditIcon } from "@/components/shared/icons/calendar-edit-icon";
 import { DesignCanvas, box, boxVars } from "@/features/home/components/design-canvas";
 import { SectionHeading } from "@/features/home/components/section-heading";
 import { JOURNEY_STEPS, type JourneyStep } from "@/features/home/content";
@@ -67,13 +68,7 @@ function JourneyCard({ step }: { step: JourneyStep }) {
           step.theme.accent,
         )}
       >
-        <Image
-          src="/images/home/icon-calendar-edit.svg"
-          alt=""
-          width={48}
-          height={48}
-          className="size-[3em]"
-        />
+        <CalendarEditIcon className="size-[3em] text-white" />
       </span>
       {/* Figma: card 363 × 428, white panel 292 tall; the panel height is fixed from xl. */}
       <div className="flex min-h-[18.25em] flex-col gap-[1em] rounded-[2.5em] bg-white px-[1em] pt-[2em] pb-[2.5em] xl:h-[18.25em] xl:pb-0">
