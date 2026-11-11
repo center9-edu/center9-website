@@ -1,14 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ArrowCircleRightIcon } from "@/components/shared/icons/arrow-circle-right-icon";
+import { CalendarIcon } from "@/components/shared/icons/calendar-icon";
+import { CodeIcon } from "@/components/shared/icons/code-icon";
+import { FolderIcon } from "@/components/shared/icons/folder-icon";
+import { RoutingIcon } from "@/components/shared/icons/routing-icon";
+import { TeacherIcon } from "@/components/shared/icons/teacher-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { TRIAL_CTA } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 const BENEFITS = [
-  { label: "Tư vấn lộ trình miễn phí", icon: "/images/home/icon-routing.svg" },
-  { label: "Học thử 1:1", icon: "/images/home/icon-folder.svg" },
-  { label: "Đánh giá đầu vào", icon: "/images/home/icon-teacher.svg", },
+  { label: "Tư vấn lộ trình miễn phí", icon: RoutingIcon },
+  { label: "Học thử 1:1", icon: FolderIcon },
+  { label: "Đánh giá đầu vào", icon: TeacherIcon },
 ];
 
 export function HeroSection() {
@@ -18,7 +24,7 @@ export function HeroSection() {
         <div className="flex flex-col items-start gap-10 lg:gap-16">
           <div className="flex flex-col items-start gap-6 lg:gap-8">
             <p className="inline-flex items-center gap-2.5 rounded-full bg-[#ebedff] px-4.5 py-2 text-sm/[1.4] font-semibold text-[#00095f] sm:text-base/[1.4]">
-              <Image src="/images/home/icon-code.svg" alt="" width={22} height={22} className="select-none pointer-events-none" />
+              <CodeIcon className="select-none pointer-events-none" />
               LẬP TRÌNH & CÔNG NGHỆ CHO HỌC SINH 7–18 TUỔI
             </p>
             <h1 className="text-3xl/[1.4] font-bold text-balance text-[#00095f] sm:text-[40px]/[1.4] lg:text-[34px]/[1.4] xl:text-[40px]/[1.4]">
@@ -27,7 +33,7 @@ export function HeroSection() {
             <ul className="flex flex-wrap gap-x-6.5 gap-y-3 text-sm/[1.4] text-ink-body">
               {BENEFITS.map((benefit) => (
                 <li key={benefit.label} className="flex items-center gap-3">
-                  <Image src={benefit.icon} alt="" width={18} height={18} />
+                  <benefit.icon className="text-primary" />
                   {benefit.label}
                 </li>
               ))}
@@ -42,7 +48,7 @@ export function HeroSection() {
                 "h-16 w-57.5 rounded-full bg-brand-blue px-6 font-semibold text-white hover:bg-brand-blue/90",
               )}
             >
-              <Image src="/images/home/icon-calendar.svg" alt="" width={22} height={22} />
+              <CalendarIcon className="size-5.5" />
               {TRIAL_CTA.label}
             </Link>
             <Link
@@ -53,7 +59,7 @@ export function HeroSection() {
               )}
             >
               Khám phá khóa học
-              <Image src="/images/home/icon-arrow-circle-right.svg" alt="" width={22} height={22} />
+              <ArrowCircleRightIcon className="size-5.5" />
             </Link>
           </div>
         </div>
