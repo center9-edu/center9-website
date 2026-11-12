@@ -138,31 +138,61 @@ export const FEATURED_COURSES: FeaturedCourse[] = [
 
 export type StudentProject = {
   title: string;
-  author: string;
+  description: string;
   image: string;
-  category?: string;
-  authorAvatar?: string;
+  student: { name: string; avatar: string; course: string; age: number };
+  tag: { label: string; tone: "game" | "python" | "web" };
 };
 
 // Placeholder showcase from the design; replace with confirmed student work before launch.
-export const FEATURED_PROJECT: StudentProject = {
-  title: "The Cat Apple",
-  author: "Bao Ngoc",
-  image: "/images/home/project-cat-apple.png",
-  authorAvatar: "/images/home/avatar-bao-ngoc-small.png",
-};
-
 export const STUDENT_PROJECTS: StudentProject[] = [
   {
-    title: "Ocean Cleaner",
-    author: "Max Tran",
-    category: "Scratch",
-    image: "/images/home/project-ocean-cleaner.png",
+    title: "Game Mèo Nhặt Táo",
+    description: "Trò chơi điều khiển nhân vật mèo nhặt táo và ghi điểm.",
+    image: "/images/home/project-apple-cat.png",
+    student: {
+      name: "Bảo Ngọc",
+      avatar: "/images/home/avatar-student.png",
+      course: "Scratch Cho Người Mới Bắt Đầu",
+      age: 9,
+    },
+    tag: { label: "Game", tone: "game" },
   },
   {
-    title: "Apple Cat",
-    author: "Jun Dang",
-    image: "/images/home/project-apple-cat.png",
+    title: "Ocean Cleaner",
+    description: "Trò chơi giúp làm sạch đại dương bằng cách thu gom rác thải.",
+    image: "/images/home/project-ocean-cleaner.png",
+    student: {
+      name: "Bảo Ngọc",
+      avatar: "/images/home/avatar-student.png",
+      course: "Scratch Nâng Cao",
+      age: 11,
+    },
+    tag: { label: "Game", tone: "game" },
+  },
+  {
+    title: "Chatbot Thông Minh",
+    description: "Chatbot đơn giản trả lời câu hỏi và trò chuyện với người dùng.",
+    image: "/images/home/project-chatbot.png",
+    student: {
+      name: "Gia Huy",
+      avatar: "/images/home/avatar-student.png",
+      course: "Python Cho Người Mới",
+      age: 13,
+    },
+    tag: { label: "Python", tone: "python" },
+  },
+  {
+    title: "Ocean Cleaner",
+    description: "Trò chơi giúp làm sạch đại dương bằng cách thu gom rác thải.",
+    image: "/images/home/project-portfolio.png",
+    student: {
+      name: "Phương Anh",
+      avatar: "/images/home/avatar-student.png",
+      course: "Lập Trình Web Cơ Bản",
+      age: 15,
+    },
+    tag: { label: "Web", tone: "web" },
   },
 ];
 
