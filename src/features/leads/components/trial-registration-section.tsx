@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { DocumentIcon } from "@/components/shared/icons/document-icon";
 import { TrialRegistrationForm } from "@/features/leads/components/trial-registration-form";
 
 // Layout follows the Figma "Registration Section" frame (1440 × 924).
@@ -34,28 +35,18 @@ export function TrialRegistrationSection() {
 
         <div className="mx-auto flex w-full max-w-140 flex-col items-center gap-5 rounded-[28px] bg-white px-5 pt-9 pb-8.5 shadow-[0px_12px_28px_0px_rgba(13,26,64,0.07)] sm:px-10.5">
           <div className="flex size-15.5 items-center justify-center rounded-full border border-[#d1d6f0]">
-            <Image src="/images/registration/icon-document.svg" alt="" width={28} height={28} />
+            <DocumentIcon className="text-[#0029b9]" />
           </div>
           <h2 className="text-center text-2xl/[34px] font-semibold tracking-[-0.3px] text-[#050d33] sm:text-[28px]/[34px]">
             Đăng ký học thử miễn phí
           </h2>
           <p className="text-center text-sm/[1.4] text-[#757a8a]">
-            Trải nghiệm 45 phút · Đánh giá đầu vào · Tư vấn lộ trình
+            Trải nghiệm 45 phút ·{" "}
+            <span className="font-medium whitespace-nowrap text-[#3b4256]">Dành cho học viên 8–18 tuổi</span>
           </p>
           <span aria-hidden className="h-1 w-12 rounded-full bg-[#6147d1]" />
 
           <TrialRegistrationForm />
-
-          <p className="flex items-start gap-2.5 text-sm/[1.4] text-[#757a8a]">
-            <Image
-              src="/images/registration/icon-shield.svg"
-              alt=""
-              width={20}
-              height={20}
-              className="shrink-0"
-            />
-            Center9Edu sẽ liên hệ để xác nhận lịch học thử và tư vấn lộ trình phù hợp.
-          </p>
         </div>
       </div>
     </section>
