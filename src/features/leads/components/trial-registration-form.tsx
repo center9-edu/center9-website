@@ -215,7 +215,7 @@ function RegistrationFields({
       {values.studentAge ? (
         <p
           aria-live="polite"
-          className="flex items-start gap-2.5 rounded-xl bg-[#eaf1ff] px-3.5 py-3 text-[13px]/[1.45] text-[#3b4256]"
+          className="flex items-start gap-2.5 rounded-xl bg-[#eaf1ff] px-3.5 py-3 text-[13px]/[1.45] text-ink-body"
         >
           <InfoIcon aria-hidden className="mt-px size-5 shrink-0 text-[#3366e5]" strokeWidth={1.75} />
           {isMinor
@@ -311,7 +311,7 @@ function RegistrationFields({
           type="button"
           aria-expanded={false}
           onClick={() => setIsNoteOpen(true)}
-          className="flex h-10 w-full items-center gap-2 rounded-xl bg-[#eef3fe] px-3.5 text-left text-sm text-[#3b4256] outline-none focus-visible:ring-3 focus-visible:ring-[#3366e5]/30"
+          className="flex h-10 w-full items-center gap-2 rounded-xl bg-[#eef3fe] px-3.5 text-left text-sm text-ink-body outline-none focus-visible:ring-3 focus-visible:ring-[#3366e5]/30"
         >
           <PlusIcon size={16} className="text-[#2f5bd8]" strokeWidth={2.25} />
           <span>
@@ -332,7 +332,7 @@ function RegistrationFields({
             aria-describedby={errors.privacyConsent ? "trial-privacyConsent-error" : undefined}
             className="mt-0.5 size-5 shrink-0 accent-[#3366e5]"
           />
-          <label htmlFor="trial-privacyConsent" className="text-[13px]/[1.5] text-[#3b4256]">
+          <label htmlFor="trial-privacyConsent" className="text-[13px]/[1.5] text-ink-body">
             Tôi đã đọc{" "}
             <Link href="#" className="text-[#2f5bd8] underline underline-offset-2">
               Chính sách bảo mật
