@@ -2,23 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { BookOpenIcon, ChevronDownIcon, CircleCheckIcon, InfoIcon } from "lucide-react";
-import {
-  useActionState,
-  useState,
-  type FormEvent,
-  type ReactNode,
-} from "react";
+import { ChevronDownIcon } from "lucide-react";
+import { useActionState, useState, type FormEvent, type ReactNode } from "react";
 
-import { CallIcon } from "@/components/shared/icons/call-icon";
-import { NoteIcon } from "@/components/shared/icons/note-icon";
-import { PeopleIcon } from "@/components/shared/icons/people-icon";
-import { PlusIcon } from "@/components/shared/icons/plus-icon";
-import { UserIcon } from "@/components/shared/icons/user-icon";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
@@ -52,10 +41,9 @@ const AGE_OPTIONS = Array.from(
   (_, index) => String(STUDENT_AGE_RANGE.min + index),
 );
 
+// Figma "Registration Field": 52px box, 16px text, red border on error.
 const CONTROL_CLASS =
-  "w-full rounded-[10px] border border-[#d6dbe5] bg-white pl-3.5 text-[15px]/[1.4] text-navy outline-none placeholder:text-[#9aa0ad] focus-visible:border-[#3366e5] focus-visible:ring-3 focus-visible:ring-[#3366e5]/15 aria-invalid:border-destructive";
-
-const FIELD_ICON_CLASS = "size-5.5 shrink-0 text-[#292d32]";
+  "w-full rounded-[10px] border border-[#d6dbe5] bg-white px-4 text-base/[1.4] text-foreground outline-none placeholder:text-[#757a8a] focus-visible:border-brand-blue focus-visible:ring-3 focus-visible:ring-brand-blue/15 aria-invalid:border-destructive";
 
 export function TrialRegistrationForm() {
   const [state, formAction, isPending] = useActionState(submitTrialRegistration, INITIAL_STATE);
@@ -89,7 +77,7 @@ export function TrialRegistrationForm() {
       >
         <DialogContent
           showCloseButton={false}
-          className="flex w-[414px] flex-col items-center gap-0 rounded-[44px] bg-white px-6 pt-18.5 pb-10 text-center ring-0 sm:max-w-[414px]"
+          className="flex w-[449px] flex-col items-center gap-4 rounded-[44px] bg-white px-6 py-7 text-center ring-0 sm:max-w-[449px]"
         >
           <Image
             src="/images/registration/success-badge.png"
@@ -98,21 +86,24 @@ export function TrialRegistrationForm() {
             height={200}
             className="size-40 sm:size-50"
           />
-          <DialogTitle className="mt-9 text-[28px]/[44px] font-semibold text-[#050f2e] sm:text-[32px]/[44px]">
-            Đăng ký thành công!
-          </DialogTitle>
-          <DialogDescription className="mt-2 max-w-90.5 text-[17px]/[22px] tracking-[-0.24px] text-ink-body">
-            Center9Edu đã nhận được thông tin đăng ký. Đội ngũ tư vấn sẽ liên hệ để tìm hiểu nhu
-            cầu và hỗ trợ sắp xếp lịch học thử phù hợp.
-          </DialogDescription>
-          <DialogClose
+          <div className="flex flex-col gap-2">
+            <DialogTitle className="text-2xl/9 font-semibold text-[#050f2e]">
+              Đăng ký thành công
+            </DialogTitle>
+            <DialogDescription className="text-[17px]/[24px] text-ink-body">
+              Center9Edu đã nhận được thông tin đăng ký. Đội ngũ tư vấn sẽ liên hệ để tìm hiểu nhu
+              cầu và hỗ trợ sắp xếp lịch học thử phù hợp.
+            </DialogDescription>
+          </div>
+          <Link
+            href="/"
             className={cn(
-              buttonVariants({ variant: "outline" }),
-              "mt-6 h-14 w-46 rounded-full border-primary text-base font-bold text-[#00095f]",
+              buttonVariants(),
+              "h-15.5 w-54 rounded-[40px] bg-brand-blue text-xl font-semibold text-white hover:bg-brand-blue/90",
             )}
           >
-            Đóng
-          </DialogClose>
+            Về trang chủ
+          </Link>
         </DialogContent>
       </Dialog>
     </>
@@ -135,17 +126,20 @@ function RegistrationFields({
   const [values, setValues] = useState(initialValues);
   // Errors stay hidden until the first submit attempt, then follow the input live.
   const [showErrors, setShowErrors] = useState(Boolean(serverError));
-  const [isNoteOpen, setIsNoteOpen] = useState(Boolean(initialValues.note));
 
   const liveErrors = validateTrialRegistration(values);
   const errors = showErrors ? liveErrors : {};
-  const isValid = (field: TrialRegistrationField) => Boolean(values[field]) && !liveErrors[field];
 
   const update = (field: TrialRegistrationField, value: string) =>
     setValues((previous) => ({ ...previous, [field]: value }));
 
   const age = Number(values.studentAge);
   const isMinor = Boolean(values.studentAge) && age <= MINOR_MAX_AGE;
+  const ageHint = !values.studentAge
+    ? undefined
+    : isMinor
+      ? "(*) Vui lòng để lại số điện thoại phụ huynh/người giám hộ để Center9Edu tư vấn chi tiết hơn"
+      : `(*) Học viên ${STUDENT_AGE_RANGE.max} tuổi có thể sử dụng số điện thoại cá nhân để Center9Edu liên hệ tư vấn`;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     if (Object.keys(liveErrors).length > 0) {
@@ -158,170 +152,118 @@ function RegistrationFields({
 
   return (
     <form action={action} onSubmit={handleSubmit} noValidate className="flex w-full flex-col gap-5">
-      <Field
-        name="registrantName"
-        label="Họ và tên"
-        required
-        icon={<UserIcon className={FIELD_ICON_CLASS} />}
-        error={errors.registrantName}
-        valid={isValid("registrantName")}
-      >
-        {(props) => (
-          <input
-            {...props}
-            type="text"
-            autoComplete="name"
-            maxLength={FIELD_LIMITS.registrantName.max + 20}
-            placeholder="Nhập họ và tên"
-            value={values.registrantName}
-            onChange={(event) => update("registrantName", event.target.value)}
-            className={cn(CONTROL_CLASS, "h-12 pr-10")}
-          />
-        )}
-      </Field>
-
-      <Field
-        name="studentAge"
-        label="Độ tuổi học viên"
-        required
-        icon={<PeopleIcon className={FIELD_ICON_CLASS} />}
-        error={errors.studentAge}
-        valid={isValid("studentAge")}
-        hasChevron
-      >
-        {(props) => (
-          <select
-            {...props}
-            value={values.studentAge}
-            onChange={(event) => update("studentAge", event.target.value)}
-            className={cn(
-              CONTROL_CLASS,
-              "h-12 appearance-none pr-16",
-              !values.studentAge && "text-[#9aa0ad]",
-            )}
-          >
-            <option value="" disabled>
-              Chọn độ tuổi
-            </option>
-            {AGE_OPTIONS.map((option) => (
-              <option key={option} value={option} className="text-navy">
-                {option} tuổi
-              </option>
-            ))}
-          </select>
-        )}
-      </Field>
-
-      {values.studentAge ? (
-        <p
-          aria-live="polite"
-          className="flex items-start gap-2.5 rounded-xl bg-[#eaf1ff] px-3.5 py-3 text-[13px]/[1.45] text-ink-body"
-        >
-          <InfoIcon aria-hidden className="mt-px size-5 shrink-0 text-[#3366e5]" strokeWidth={1.75} />
-          {isMinor
-            ? `Với học viên ${STUDENT_AGE_RANGE.min}–${MINOR_MAX_AGE} tuổi, vui lòng để lại số điện thoại phụ huynh/người giám hộ để Center9Edu xác nhận nhu cầu học thử.`
-            : `Học viên ${STUDENT_AGE_RANGE.max} tuổi có thể sử dụng số điện thoại cá nhân để Center9Edu liên hệ xác nhận và tư vấn học thử.`}
-        </p>
-      ) : null}
-
-      <Field
-        name="contactPhone"
-        label={isMinor ? "Số điện thoại phụ huynh/người giám hộ" : "Số điện thoại liên hệ"}
-        required
-        icon={<CallIcon className={FIELD_ICON_CLASS} />}
-        error={errors.contactPhone}
-        valid={isValid("contactPhone")}
-      >
-        {(props) => (
-          <input
-            {...props}
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
-            maxLength={20}
-            placeholder="Nhập số điện thoại"
-            value={values.contactPhone}
-            onChange={(event) => update("contactPhone", event.target.value)}
-            className={cn(CONTROL_CLASS, "h-12 pr-10")}
-          />
-        )}
-      </Field>
-
-      <Field
-        name="courseInterest"
-        label="Khóa học quan tâm"
-        icon={<BookOpenIcon aria-hidden className={FIELD_ICON_CLASS} strokeWidth={1.5} />}
-        error={errors.courseInterest}
-        valid={isValid("courseInterest")}
-        hasChevron
-      >
-        {(props) => (
-          <select
-            {...props}
-            value={values.courseInterest}
-            onChange={(event) => update("courseInterest", event.target.value)}
-            className={cn(
-              CONTROL_CLASS,
-              "h-12 appearance-none pr-16",
-              !values.courseInterest && "text-[#9aa0ad]",
-            )}
-          >
-            <option value="">Chọn khóa học</option>
-            {COURSE_OPTIONS.map((course) => (
-              <option key={course.value} value={course.value} className="text-navy">
-                {course.label}
-              </option>
-            ))}
-          </select>
-        )}
-      </Field>
-
-      {isNoteOpen ? (
-        <Field
-          name="note"
-          label="Ghi chú thêm"
-          icon={<NoteIcon className={FIELD_ICON_CLASS} />}
-          error={errors.note}
-          valid={isValid("note")}
-          multiline
-        >
+      <div className="flex flex-col gap-6">
+        <Field name="registrantName" label="Họ và tên" required error={errors.registrantName}>
           {(props) => (
-            <>
-              <textarea
-                {...props}
-                rows={3}
-                maxLength={FIELD_LIMITS.note}
-                autoFocus={!initialValues.note}
-                placeholder="Nhập ghi chú (nếu có)"
-                value={values.note}
-                onChange={(event) => update("note", event.target.value)}
-                className={cn(CONTROL_CLASS, "block min-h-20 resize-y pt-3 pr-10 pb-6")}
-              />
-              <span
-                aria-hidden
-                className="absolute right-3 bottom-2 text-xs text-[#9aa0ad]"
-              >
-                {values.note.length}/{FIELD_LIMITS.note}
-              </span>
-            </>
+            <input
+              {...props}
+              type="text"
+              autoComplete="name"
+              maxLength={FIELD_LIMITS.registrantName.max + 20}
+              placeholder="Nguyễn Văn A"
+              value={values.registrantName}
+              onChange={(event) => update("registrantName", event.target.value)}
+              className={cn(CONTROL_CLASS, "h-13")}
+            />
           )}
         </Field>
-      ) : (
-        <button
-          type="button"
-          aria-expanded={false}
-          onClick={() => setIsNoteOpen(true)}
-          className="flex h-10 w-full items-center gap-2 rounded-xl bg-[#eef3fe] px-3.5 text-left text-sm text-ink-body outline-none focus-visible:ring-3 focus-visible:ring-[#3366e5]/30"
-        >
-          <PlusIcon size={16} className="text-[#2f5bd8]" strokeWidth={2.25} />
-          <span>
-            <span className="font-semibold text-[#2f5bd8]">Thêm ghi chú</span> (không bắt buộc)
-          </span>
-        </button>
-      )}
 
-      <div className="flex flex-col gap-1.5">
-        <div className="flex items-start gap-3">
+        <Field
+          name="studentAge"
+          label="Độ tuổi học viên"
+          required
+          error={errors.studentAge}
+          hint={ageHint}
+          hasChevron
+        >
+          {(props) => (
+            <select
+              {...props}
+              value={values.studentAge}
+              onChange={(event) => update("studentAge", event.target.value)}
+              className={cn(
+                CONTROL_CLASS,
+                "h-13 appearance-none pr-11",
+                !values.studentAge && "text-[#757a8a]",
+              )}
+            >
+              <option value="" disabled>
+                Vui lòng chọn
+              </option>
+              {AGE_OPTIONS.map((option) => (
+                <option key={option} value={option} className="text-foreground">
+                  {option} tuổi
+                </option>
+              ))}
+            </select>
+          )}
+        </Field>
+
+        <Field
+          name="contactPhone"
+          label={isMinor ? "Số điện thoại phụ huynh/người giám hộ" : "Số điện thoại liên hệ"}
+          required
+          error={errors.contactPhone}
+        >
+          {(props) => (
+            <input
+              {...props}
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              maxLength={20}
+              placeholder="0912 345 678"
+              value={values.contactPhone}
+              onChange={(event) => update("contactPhone", event.target.value)}
+              className={cn(CONTROL_CLASS, "h-13")}
+            />
+          )}
+        </Field>
+
+        <Field
+          name="courseInterest"
+          label="Khóa học quan tâm"
+          error={errors.courseInterest}
+          hasChevron
+        >
+          {(props) => (
+            <select
+              {...props}
+              value={values.courseInterest}
+              onChange={(event) => update("courseInterest", event.target.value)}
+              className={cn(
+                CONTROL_CLASS,
+                "h-13 appearance-none pr-11",
+                !values.courseInterest && "text-[#757a8a]",
+              )}
+            >
+              <option value="">Vui lòng chọn</option>
+              {COURSE_OPTIONS.map((course) => (
+                <option key={course.value} value={course.value} className="text-foreground">
+                  {course.label}
+                </option>
+              ))}
+            </select>
+          )}
+        </Field>
+
+        <Field name="note" label="Ghi chú thêm (không bắt buộc)" error={errors.note}>
+          {(props) => (
+            <textarea
+              {...props}
+              rows={2}
+              maxLength={FIELD_LIMITS.note}
+              placeholder="Thêm ghi chú"
+              value={values.note}
+              onChange={(event) => update("note", event.target.value)}
+              className={cn(CONTROL_CLASS, "block h-20.75 resize-y py-3.5")}
+            />
+          )}
+        </Field>
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <div className="flex items-start gap-2">
           <input
             id="trial-privacyConsent"
             name="privacyConsent"
@@ -330,22 +272,18 @@ function RegistrationFields({
             onChange={(event) => update("privacyConsent", event.target.checked ? "on" : "")}
             aria-invalid={Boolean(errors.privacyConsent)}
             aria-describedby={errors.privacyConsent ? "trial-privacyConsent-error" : undefined}
-            className="mt-0.5 size-5 shrink-0 accent-[#3366e5]"
+            className="mt-0.5 size-5 shrink-0 accent-brand-blue"
           />
-          <label htmlFor="trial-privacyConsent" className="text-[13px]/[1.5] text-ink-body">
+          <label htmlFor="trial-privacyConsent" className="text-base/[1.4] text-[#757a8a]">
             Tôi đã đọc{" "}
-            <Link href="#" className="text-[#2f5bd8] underline underline-offset-2">
-              Chính sách bảo mật
+            <Link href="#" className="underline underline-offset-2 hover:text-brand-blue">
+              chính sách bảo mật
             </Link>{" "}
-            và đồng ý cho Center9Edu xử lý thông tin để liên hệ tư vấn.
-            <span aria-hidden className="text-destructive">
-              {" "}
-              *
-            </span>
+            và đồng ý cho team Center9Edu sử dụng để liên hệ tư vấn
           </label>
         </div>
         {errors.privacyConsent ? (
-          <p id="trial-privacyConsent-error" className="pl-8 text-sm text-destructive">
+          <p id="trial-privacyConsent-error" className="pl-7 text-sm/[1.4] text-destructive">
             {errors.privacyConsent}
           </p>
         ) : null}
@@ -370,7 +308,7 @@ function RegistrationFields({
       <button
         type="submit"
         disabled={isPending}
-        className="h-14 w-full rounded-[40px] bg-linear-to-r from-[#3366e5] to-[#7b3fe0] text-lg font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-70 sm:text-xl"
+        className="h-15.5 w-full rounded-[40px] bg-brand-blue text-lg font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-70 sm:text-xl"
       >
         {isPending ? "Đang gửi đăng ký…" : "Đăng ký học thử miễn phí"}
       </button>
@@ -389,74 +327,60 @@ type ControlProps = {
 type FieldProps = {
   name: TrialRegistrationField;
   label: string;
-  icon: ReactNode;
   required?: boolean;
   error?: string;
-  valid: boolean;
+  /** Helper text under the field; replaced by the error when there is one. */
+  hint?: string;
   hasChevron?: boolean;
-  multiline?: boolean;
   children: (props: ControlProps) => ReactNode;
 };
 
-function Field({
-  name,
-  label,
-  icon,
-  required,
-  error,
-  valid,
-  hasChevron,
-  multiline,
-  children,
-}: FieldProps) {
+function Field({ name, label, required, error, hint, hasChevron, children }: FieldProps) {
   const id = `trial-${name}`;
-  const errorId = `${id}-error`;
-  const iconTop = multiline ? "top-3.5" : "top-1/2 -translate-y-1/2";
+  const messageId = `${id}-message`;
+  const message = error ?? hint;
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <div className={cn("flex gap-3.5", multiline ? "items-start pt-3" : "items-center")}>
-        {icon}
-        <div className="relative min-w-0 flex-1">
-          {/* Label sits on the top border, as in the design. */}
-          <label
-            htmlFor={id}
-            className="absolute -top-2 left-2.5 z-10 bg-white px-1 text-xs/4 text-[#4b5165]"
-          >
-            {label}
-            {required ? (
-              <span aria-hidden className="text-destructive">
-                {" "}
-                *
-              </span>
-            ) : null}
-          </label>
-          {children({
-            id,
-            name,
-            required,
-            "aria-invalid": Boolean(error),
-            "aria-describedby": error ? errorId : undefined,
-          })}
-          {hasChevron ? (
-            <ChevronDownIcon
-              aria-hidden
-              className="pointer-events-none absolute top-1/2 right-10 size-4.5 -translate-y-1/2 text-[#4b5165]"
-            />
+    <div className="flex flex-col gap-1">
+      <div className="relative">
+        {/* Label sits on the top border, as in the design. */}
+        <label
+          htmlFor={id}
+          className="absolute -top-2.5 left-3 z-10 bg-white px-1 text-sm/[1.4] text-foreground"
+        >
+          {label}
+          {required ? (
+            <span aria-hidden className="text-destructive">
+              {" "}
+              *
+            </span>
           ) : null}
-          {valid ? (
-            <CircleCheckIcon
-              aria-hidden
-              className={cn("pointer-events-none absolute right-3 size-5 text-white", iconTop)}
-              fill="#22a35a"
-              strokeWidth={2.25}
-            />
-          ) : null}
-        </div>
+        </label>
+        {children({
+          id,
+          name,
+          required,
+          "aria-invalid": Boolean(error),
+          "aria-describedby": message ? messageId : undefined,
+        })}
+        {hasChevron ? (
+          <ChevronDownIcon
+            aria-hidden
+            className="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-foreground"
+            strokeWidth={1.5}
+          />
+        ) : null}
       </div>
-      {error ? (
-        <p id={errorId} className="pl-9 text-sm text-destructive">
-          {error}
+      {message ? (
+        <p
+          id={messageId}
+          aria-live={error ? undefined : "polite"}
+          className={cn(
+            "px-4 text-sm/[1.4]",
+            error ? "text-destructive" : "text-[#686868] italic",
+          )}
+        >
+          {message}
         </p>
       ) : null}
     </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { NavLink } from "@/components/layout/nav-link";
 import { SiteLogo } from "@/components/layout/site-logo";
 import { buttonVariants } from "@/components/ui/button";
 import { MAIN_NAV, TRIAL_CTA } from "@/config/site";
@@ -16,9 +17,9 @@ export function SiteHeader() {
           <ul className="flex gap-6 text-xl font-semibold tracking-[0.01em] text-white/60">
             {MAIN_NAV.map((item) => (
               <li key={item.label}>
-                <Link href={item.href} className="transition-colors hover:text-white">
+                <NavLink href={item.href} className="transition-colors hover:text-white">
                   {item.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>

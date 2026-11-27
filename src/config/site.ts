@@ -20,7 +20,7 @@ export const MAIN_NAV: NavItem[] = [
   { label: "Khoá học", href: "#" },
   { label: "Sản phẩm học viên", href: "#" },
   { label: "Tin tức - Sự kiện", href: "#" },
-  { label: "Về chúng tôi", href: "#" },
+  { label: "Về chúng tôi", href: "/ve-chung-toi" },
 ];
 
 export const TRIAL_CTA: NavItem = {
@@ -34,7 +34,7 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
     title: "Khám phá",
     links: [
       { label: "Trang chủ", href: "/" },
-      { label: "Về Center9Edu", href: "#" },
+      { label: "Về Center9Edu", href: "/ve-chung-toi" },
       { label: "Lộ trình học", href: "#" },
       { label: "Các khóa học", href: "#" },
       { label: "Sản phẩm học viên", href: "#" },

@@ -57,11 +57,11 @@
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: #071d3a;
+  --foreground: #002147;
   --card: oklch(1 0 0);
-  --card-foreground: #071d3a;
+  --card-foreground: #002147;
   --popover: oklch(1 0 0);
-  --popover-foreground: #071d3a;
+  --popover-foreground: #002147;
   --primary: #0029b9;
   --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
@@ -81,10 +81,10 @@
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
   /* Center9Edu brand colors (Figma: c9-color-*) */
-  --navy: #071d3a;
+  --navy: #002147;
   --navy-foreground: #ffffff;
   --cta: #ff8f00;
-  --cta-foreground: #071d3a;
+  --cta-foreground: #002147;
   --brand-blue: #264df2;
   --ink-body: #474f66;
   --ink-muted: #6b7385;

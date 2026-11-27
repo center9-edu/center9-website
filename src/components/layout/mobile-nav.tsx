@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { MenuIcon, XIcon } from "lucide-react";
 
+import { NavLink } from "@/components/layout/nav-link";
 import { buttonVariants } from "@/components/ui/button";
 import type { NavItem } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -38,13 +39,13 @@ export function MobileNav({ items, cta }: MobileNavProps) {
         <ul className="container-page flex flex-col py-4">
           {items.map((item) => (
             <li key={item.label}>
-              <Link
+              <NavLink
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className="block py-3 text-lg font-semibold text-white/60 transition-colors hover:text-white"
               >
                 {item.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
           <li className="pt-3 sm:hidden">
