@@ -65,7 +65,7 @@ export function HeroSection() {
         </div>
 
         {/* Layers and offsets follow the Figma "Hero Visual" frame (680 × 660). */}
-        <div className="relative mx-auto aspect-[680/660] w-full max-w-170">
+        <div className="relative mx-auto aspect-[680/660] w-full max-w-170 select-none">
           <div className="absolute inset-0 overflow-hidden rounded-[32px]">
             <div className="absolute top-[-23.85%] left-[-26.8%] size-[129.12%]">
               <Image
