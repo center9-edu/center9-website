@@ -54,7 +54,7 @@ export function CtaSection() {
             height={28}
             className="absolute top-[290px] left-[calc(1160/1280*100%)] z-10 hidden xl:block"
           />
-          <p className="absolute top-[74px] left-[calc(915/1280*100%)] z-10 hidden -rotate-[23.14deg] rounded-full bg-[#ffd86b] px-4 py-2.5 text-xs font-bold text-[#071d3d] xl:block">
+          <p className="absolute top-[74px] left-[calc(915/1280*100%)] z-10 hidden -rotate-[23.14deg] rounded-full bg-[#ffd86b] px-4 py-2.5 text-xs font-bold text-navy xl:block">
             HỌC THỬ MIỄN PHÍ
           </p>
           <Image
